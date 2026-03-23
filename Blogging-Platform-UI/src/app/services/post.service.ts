@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { Post, PostApiResponse, mapPost } from '../models/post.model';
+import { Post, PostApiResponse, PaginatedPosts, PaginatedPostsApiResponse, mapPost } from '../models/post.model';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
@@ -9,14 +9,24 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  getPosts(term?: string): Observable<Post[]> {
-    let params = new HttpParams();
+  getPosts(page = 1, limit = 6, term?: string): Observable<PaginatedPosts> {
+    let params = new HttpParams()
+      .set('page', page)
+      .set('limit', limit);
     if (term) {
       params = params.set('term', term);
     }
     return this.http
-      .get<PostApiResponse[]>(this.apiUrl, { params })
-      .pipe(map((posts) => posts.map(mapPost)));
+      .get<PaginatedPostsApiResponse>(this.apiUrl, { params })
+      .pipe(
+        map((res) => ({
+          posts: res.posts.map(mapPost),
+          total: res.total,
+          page: res.page,
+          limit: res.limit,
+          totalPages: res.totalPages,
+        })),
+      );
   }
 
   getPost(id: number): Observable<Post> {

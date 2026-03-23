@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   loading = signal(true);
   error = signal('');
   searchTerm = signal('');
+  currentPage = signal(1);
+  totalPages = signal(1);
 
   constructor(private postService: PostService) {}
 
@@ -26,9 +28,11 @@ export class HomeComponent implements OnInit {
     this.loading.set(true);
     this.error.set('');
     const term = this.searchTerm().trim() || undefined;
-    this.postService.getPosts(term).subscribe({
-      next: (posts) => {
-        this.posts.set(posts);
+    this.postService.getPosts(this.currentPage(), 6, term).subscribe({
+      next: (res) => {
+        this.posts.set(res.posts);
+        this.totalPages.set(res.totalPages);
+        this.currentPage.set(res.page);
         this.loading.set(false);
       },
       error: (err) => {
@@ -40,6 +44,17 @@ export class HomeComponent implements OnInit {
   }
 
   onSearch(): void {
+    this.currentPage.set(1);
     this.loadPosts();
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages() || page === this.currentPage()) return;
+    this.currentPage.set(page);
+    this.loadPosts();
+  }
+
+  get pages(): number[] {
+    return Array.from({ length: this.totalPages() }, (_, i) => i + 1);
   }
 }

@@ -40,5 +40,37 @@
         <app-post-card [post]="post" />
       }
     </div>
+
+    @if (totalPages() > 1) {
+      <nav class="pagination">
+        <button
+          class="pagination-btn pagination-nav"
+          [disabled]="currentPage() === 1"
+          (click)="goToPage(currentPage() - 1)"
+        >
+          &larr; PREV
+        </button>
+
+        @for (page of pages; track page) {
+          <button
+            class="pagination-btn pagination-page"
+            [class.active]="page === currentPage()"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+
+        <button
+          class="pagination-btn pagination-nav"
+          [disabled]="currentPage() === totalPages()"
+          (click)="goToPage(currentPage() + 1)"
+        >
+          NEXT &rarr;
+        </button>
+
+        <span class="pagination-info">Page {{ currentPage() }} of {{ totalPages() }}</span>
+      </nav>
+    }
   }
 </section>

@@ -137,6 +137,64 @@
   gap: 30px;
 }
 
+// Pagination
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover:not(:disabled):not(.active) {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    box-shadow: var(--neon-cyan-glow);
+  }
+
+  &:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+  }
+
+  &.active {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    background: rgba(0, 245, 255, 0.12);
+    box-shadow: var(--neon-cyan-glow);
+    text-shadow: 0 0 8px rgba(0, 245, 255, 0.6);
+  }
+}
+
+.pagination-nav {
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.pagination-info {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-left: 16px;
+}
+
 // Empty State
 .empty-state {
   text-align: center;
@@ -174,5 +232,22 @@
 
   .posts-section {
     padding: 0 15px 40px;
+  }
+
+  .pagination {
+    gap: 6px;
+    margin-top: 35px;
+  }
+
+  .pagination-btn {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+  }
+
+  .pagination-info {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-top: 10px;
   }
 }
