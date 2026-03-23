@@ -1,0 +1,131 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--text-primary);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--text-primary);
+
+    .logo-highlight {
+      text-shadow: 0 0 20px rgba(0, 245, 255, 0.8), 0 0 40px rgba(0, 245, 255, 0.4);
+    }
+  }
+}
+
+.logo-bracket {
+  color: var(--neon-purple);
+  font-weight: 400;
+}
+
+.logo-text {
+  color: var(--text-primary);
+}
+
+.logo-highlight {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+  transition: text-shadow 0.3s ease;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--neon-cyan);
+    box-shadow: var(--neon-cyan-glow);
+    transition: width 0.3s ease;
+  }
+
+  &:hover,
+  &.active {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &--create {
+    background: linear-gradient(135deg, rgba(139, 0, 255, 0.2), rgba(0, 245, 255, 0.2));
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 6px;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+
+    &::after {
+      display: none;
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, rgba(139, 0, 255, 0.4), rgba(0, 245, 255, 0.4));
+      border-color: var(--neon-cyan);
+      box-shadow: var(--neon-cyan-glow);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+
+    &--create {
+      padding: 6px 14px;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<section class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">
+      <span class="title-line">BLOG</span>
+      <span class="title-line title-line--accent">PLATFORM</span>
+    </h1>
+    <p class="hero-subtitle">// Explore the digital frontier</p>
+  </div>
+</section>
+
+<section class="posts-section">
+  <div class="search-container">
+    <div class="search-wrapper">
+      <span class="search-icon">&#9906;</span>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search posts..."
+        [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event)"
+        (keyup.enter)="onSearch()"
+      />
+      <button class="search-btn" (click)="onSearch()">SCAN</button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="neon-spinner"></div>
+  } @else if (error()) {
+    <div class="error-message">{{ error() }}</div>
+  } @else if (posts().length === 0) {
+    <div class="empty-state">
+      <p class="empty-text">No posts found in the system.</p>
+      <p class="empty-sub">Initialize your first data entry.</p>
+    </div>
+  } @else {
+    <div class="posts-grid">
+      @for (post of posts(); track post.id) {
+        <app-post-card [post]="post" />
+      }
+    </div>
+  }
+</section>

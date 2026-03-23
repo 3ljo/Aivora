@@ -1,1 +1,172 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #0d0d1a;
+  --bg-card: rgba(13, 13, 26, 0.8);
+  --bg-glass: rgba(13, 13, 26, 0.6);
+  --neon-cyan: #00f5ff;
+  --neon-purple: #8b00ff;
+  --neon-pink: #ff006e;
+  --neon-cyan-glow: 0 0 10px rgba(0, 245, 255, 0.5), 0 0 20px rgba(0, 245, 255, 0.3);
+  --neon-purple-glow: 0 0 10px rgba(139, 0, 255, 0.5), 0 0 20px rgba(139, 0, 255, 0.3);
+  --neon-pink-glow: 0 0 10px rgba(255, 0, 110, 0.5), 0 0 20px rgba(255, 0, 110, 0.3);
+  --text-primary: #e0e0ff;
+  --text-secondary: #8888aa;
+  --text-muted: #555577;
+  --border-color: rgba(0, 245, 255, 0.15);
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 0, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 245, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(255, 0, 110, 0.04) 0%, transparent 50%);
+}
+
+// Grid background overlay
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+
+  &:hover {
+    color: var(--neon-pink);
+    text-shadow: var(--neon-pink-glow);
+  }
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  border-radius: 4px;
+  box-shadow: var(--neon-cyan-glow);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-purple);
+}
+
+// Neon spinner
+.neon-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+
+  &::after {
+    content: '';
+    width: 48px;
+    height: 48px;
+    border: 3px solid transparent;
+    border-top-color: var(--neon-cyan);
+    border-right-color: var(--neon-purple);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    box-shadow: var(--neon-cyan-glow);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Error message
+.error-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--neon-pink);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  text-shadow: var(--neon-pink-glow);
+  background: rgba(255, 0, 110, 0.05);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  border-radius: 8px;
+  margin: 20px;
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 245, 255, 0.3), 0 0 10px rgba(0, 245, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.5), 0 0 30px rgba(0, 245, 255, 0.2);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(0, 245, 255, 0.8), 0 0 40px rgba(0, 245, 255, 0.4);
+  }
+}

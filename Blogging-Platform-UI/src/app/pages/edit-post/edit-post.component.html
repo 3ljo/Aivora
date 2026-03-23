@@ -1,0 +1,52 @@
+@if (loading()) {
+  <div class="neon-spinner"></div>
+} @else {
+  <div class="form-page">
+    <a [routerLink]="['/posts', postId]" class="back-link">&larr; Back to post</a>
+    <h1 class="form-title">Edit <span class="accent">Post</span></h1>
+
+    @if (error()) {
+      <div class="error-message">{{ error() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="post-form">
+      <div class="form-group">
+        <label class="form-label">Title</label>
+        <input type="text" formControlName="title" class="form-input" placeholder="Enter post title..." />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <input type="text" formControlName="category" class="form-input" placeholder="e.g. Technology, Science..." />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Tags</label>
+        <input type="text" formControlName="tags" class="form-input" placeholder="Comma separated: angular, typescript, web" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Cover Image URL</label>
+        <input type="text" formControlName="imageUrl" class="form-input" placeholder="https://example.com/image.png" />
+        @if (form.get('imageUrl')?.value; as url) {
+          <div class="image-preview">
+            <img [src]="url" alt="Cover preview" class="preview-img" />
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Content</label>
+        <textarea formControlName="content" class="form-input form-textarea" placeholder="Write your post content..." rows="10"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="form.invalid || submitting()">
+        @if (submitting()) {
+          <span class="btn-spinner"></span> Updating...
+        } @else {
+          Update Post
+        }
+      </button>
+    </form>
+  </div>
+}

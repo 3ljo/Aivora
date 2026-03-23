@@ -1,0 +1,53 @@
+@if (loading()) {
+  <div class="neon-spinner"></div>
+} @else if (error()) {
+  <div class="error-message">{{ error() }}</div>
+} @else if (post(); as p) {
+  <article class="post-detail">
+    @if (p.imageUrl) {
+      <div class="hero-image-wrapper">
+        <img [src]="p.imageUrl" [alt]="p.title" class="hero-image" />
+        <div class="hero-image-fade"></div>
+      </div>
+    }
+
+    <div class="post-header">
+      <a routerLink="/" class="back-link">&larr; Back to posts</a>
+
+      <div class="post-meta">
+        <span class="category-badge">{{ p.category }}</span>
+        <span class="post-date">{{ p.created_at | date:'MMMM dd, yyyy • HH:mm' }}</span>
+      </div>
+
+      <h1 class="post-title">{{ p.title }}</h1>
+
+      <div class="post-tags">
+        @for (tag of p.tags; track tag) {
+          <span class="tag">#{{ tag }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="post-body">
+      <p>{{ p.content }}</p>
+    </div>
+
+    <div class="post-actions">
+      <a [routerLink]="['/posts/edit', p.id]" class="btn btn--edit">Edit Post</a>
+      <button class="btn btn--delete" (click)="confirmDelete()">Delete Post</button>
+    </div>
+
+    @if (showDeleteConfirm()) {
+      <div class="delete-overlay" (click)="cancelDelete()">
+        <div class="delete-modal" (click)="$event.stopPropagation()">
+          <h3 class="modal-title">Confirm Deletion</h3>
+          <p class="modal-text">Are you sure you want to permanently delete this post? This action cannot be undone.</p>
+          <div class="modal-actions">
+            <button class="btn btn--cancel" (click)="cancelDelete()">Cancel</button>
+            <button class="btn btn--confirm-delete" (click)="deletePost()">Delete</button>
+          </div>
+        </div>
+      </div>
+    }
+  </article>
+}
