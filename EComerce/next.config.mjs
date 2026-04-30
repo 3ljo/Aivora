@@ -19,6 +19,11 @@ const nextConfig = {
   env: {
     BUILD_STATIC_EXPORT: JSON.stringify(isStaticExport),
   },
+  eslint: {
+    // Lint is enforced via `yarn lint`; skip during production builds so a
+    // perfectionist/sort-imports nit doesn't block deploys.
+    ignoreDuringBuilds: true,
+  },
   // Without --turbopack (next dev)
   webpack(config) {
     config.module.rules.push({
