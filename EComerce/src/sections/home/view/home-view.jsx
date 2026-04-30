@@ -194,7 +194,7 @@ export function HomeView() {
               {/* Trust stats with dividers */}
               <Stack
                 direction="row"
-                divider={<Box sx={{ width: 1, height: 40, bgcolor: 'rgba(255,255,255,0.1)' }} />}
+                divider={<Box sx={{ width: '1px', height: 40, bgcolor: 'rgba(255,255,255,0.1)' }} />}
                 spacing={4}
               >
                 {[
@@ -233,15 +233,43 @@ export function HomeView() {
                     bgcolor: theme.vars.palette.grey[800],
                     border: '1px solid rgba(255,255,255,0.08)',
                     boxShadow: '0 40px 80px rgba(0,0,0,0.5)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    gap: 2,
                   })}
                 >
-                  <Iconify icon="solar:hanger-2-bold-duotone" width={80} sx={{ opacity: 0.3, color: 'primary.light' }} />
-                  <Typography variant="subtitle2" sx={{ opacity: 0.5 }}>Premium Apparel</Typography>
+                  <Box
+                    component="img"
+                    src={`${CONFIG.assetsDir}/assets/images/mock/m-product/product-1.webp`}
+                    alt="Premium Apparel"
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                    }}
+                  />
+                  {/* Gradient overlay for text legibility */}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      inset: 0,
+                      background:
+                        'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%)',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      bottom: 16,
+                      left: 16,
+                      right: 16,
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ color: 'common.white', fontWeight: 700 }}
+                    >
+                      Premium Apparel
+                    </Typography>
+                  </Box>
                   <Box
                     sx={{
                       position: 'absolute',
@@ -270,15 +298,42 @@ export function HomeView() {
                     bgcolor: theme.vars.palette.grey[800],
                     border: '1px solid rgba(255,255,255,0.06)',
                     boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    gap: 2,
                   })}
                 >
-                  <Iconify icon="solar:sneakers-bold-duotone" width={70} sx={{ opacity: 0.3, color: 'info.light' }} />
-                  <Typography variant="subtitle2" sx={{ opacity: 0.5 }}>Trending Now</Typography>
+                  <Box
+                    component="img"
+                    src={`${CONFIG.assetsDir}/assets/images/mock/m-product/product-5.webp`}
+                    alt="Trending Now"
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      inset: 0,
+                      background:
+                        'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%)',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      bottom: 16,
+                      left: 16,
+                      right: 16,
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ color: 'common.white', fontWeight: 700 }}
+                    >
+                      Trending Now
+                    </Typography>
+                  </Box>
                 </Box>
 
                 {/* Floating price tag */}
